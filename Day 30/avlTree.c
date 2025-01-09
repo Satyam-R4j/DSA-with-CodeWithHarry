@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define max(a, b) (a > b ? a : b)
+
 struct node
 {
     int data;
@@ -75,11 +77,32 @@ struct node *insert(struct node *n, int data)
         n->right = insert(n->right, data);
     }
     return n;
+    n->right = 1 + max(getHeight(n->left), getHeight(n->right));
+    int bf = getBalanceFactor(n);
 
-    // int bf = getBalanceFactor(n)
-    // {
-        
-    // }
+    // Left Left Case
+    if (bf > 1 && n->left->data)
+    {
+        rightRotate(n);
+    }
+    // Right Right Case
+    if (bf < -1 && n->right->data)
+    {
+        leftRotate(n);
+    }
+
+    // Left Right Case
+    if (bf > 1 && data > n->left->data)
+    {
+        n->left = leftRotate(n->left);
+        rightRotate(n);
+    }
+    if (bf < -1 && data < n->right->data)
+    {
+        n->right = rightRotate(n->right);
+        leftRotate(n);
+    }
+    return n;
 }
 
 int main(int argc, char const *argv[])

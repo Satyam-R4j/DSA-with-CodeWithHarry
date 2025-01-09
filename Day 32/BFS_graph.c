@@ -66,28 +66,26 @@ int main(int argc, char const *argv[])
         {1, 0, 1, 0, 1, 0, 0},
         {0, 0, 1, 1, 0, 1, 1},
         {0, 0, 0, 0, 1, 0, 0},
-        {0, 0, 0, 0, 1, 0, 0}
-    };
+        {0, 0, 0, 0, 1, 0, 0}};
 
-    printf("%d",i);
-    visited[i] =1;
-    enqueue(&qu,i);
+    printf("%d", i);
+    visited[i] = 1;
+    enqueue(&qu, i);
     while (!isEmpty(&qu))
     {
         int node = dequeue(&qu);
-        for (int  j = 0; j < 7; j++)
+        printf("The node is %d\n", node);
+        for (int j = 0; j < 7; j++)
         {
-            if (a[node][j]==1 && visited[j] == 0)
+            if (a[node][j] == 1 && visited[j] == 0)
             {
-                printf("%d",j);
-                visited[j] =1;
-                enqueue(&qu,j);
+                printf(" the j is %d\n", j);
+                visited[j] = 1;
+                printf(" the visited of j is %d\n", visited[j]);
+                enqueue(&qu, j);
             }
-            
         }
-        
     }
-    
 
     return 0;
 }
